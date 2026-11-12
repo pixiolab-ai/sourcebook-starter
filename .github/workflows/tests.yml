@@ -1,0 +1,24 @@
+# Lint and test on every push, tag and pull request. The tests run offline, so
+# no API key or other secret is needed. pixiolab.com reads this workflow's
+# result at each checkpoint tag: a warning until v0.6, required from v0.6 on.
+# In Week 6 you add eval.yml beside it: Tripwire, the gate that fails a PR
+# when retrieval quality drops or a permission test leaks.
+name: tests
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v7
+      - run: uv sync
+      - run: uv run ruff check .
+      - run: uv run pytest -q

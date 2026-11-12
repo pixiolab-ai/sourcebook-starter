@@ -1,0 +1,36 @@
+# Secrets: commit .env.example, never .env
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.coverage
+htmlcov/
+
+# Data caches: indexes, embeddings and downloads that ingest rebuilds.
+# The corpus itself and data/README.md stay in git.
+data/cache/
+data/index/
+chroma/
+.chroma/
+
+# Results scratch: commit real eval runs to results/, try things in results/scratch/
+results/scratch/
+
+# Editors and operating systems
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,35 @@
+[project]
+name = "sourcebook"
+version = "0.1.0"
+description = "Hybrid-search RAG with citations and permission-aware retrieval, measured by Groundtruth and gated by Tripwire."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=2.8.0",
+    "pydantic>=2.14.3",
+    "python-dotenv>=1.2.4",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.4",
+]
+
+[tool.uv]
+# An application, not a library: uv installs the dependencies, and you run
+# code from the repo root, e.g. uv run python -m warmups.hello_llm
+package = false
+
+[tool.ruff]
+line-length = 100
+# The Week 6 notebook in ml-basics/ is exploratory; lint the code you ship.
+extend-exclude = ["*.ipynb"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501"]  # long lines are fine; `uv run ruff format` keeps code tidy
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
